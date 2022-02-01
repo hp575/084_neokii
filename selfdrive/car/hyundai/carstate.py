@@ -36,6 +36,8 @@ class CarState(CarStateBase):
     self.standstill = False
     self.cruiseState_enabled = False
     self.cruiseState_speed = 0
+    self.prev_cruiseState_speed = 0
+    self.obj_valid = 0
 
     self.use_cluster_speed = Params().get_bool('UseClusterSpeed')
 
@@ -226,6 +228,10 @@ class CarState(CarStateBase):
     self.standstill = ret.standstill or ret.cruiseState.standstill
     self.cruiseState_enabled = ret.cruiseState.enabled
     self.cruiseState_speed = ret.cruiseState.speed
+    self.prev_cruiseState_speed = self.cruiseState_speed if self.cruiseState_speed else self.prev_cruiseState_speed
+    self.obj_valid = cp_scc.vl["SCC11"]['ObjValid']
+    if self.cruise_buttons == 4: #cancel
+      self.prev_cruiseState_speed = 0
     ret.cruiseGap = self.cruise_gap
 
     return ret

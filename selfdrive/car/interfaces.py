@@ -141,6 +141,10 @@ class CarInterfaceBase():
         events.add(EventName.pcmEnable)
       elif not cs_out.cruiseState.enabled:
         events.add(EventName.pcmDisable)
+    
+    if cs_out.cruiseState.enabled:
+      if cs_out.gearShifter == GearShifter.drive and cs_out.vEgo > 4.166667:
+        events.add(EventName.pcmEnable)
 
     return events
 
