@@ -96,7 +96,7 @@ class CarState(CarStateBase):
 
     ret.steerWarning = self.mdps_error_cnt > 100
 
-    #ret.autoHold = cp.vl["ESP11"]['AVH_STAT']
+    ret.autoHold = cp.vl["ESP11"]['AVH_STAT']
 
     # cruise state
     ret.cruiseState.enabled = (cp_scc.vl["SCC12"]['ACCMode'] != 0) if not self.no_radar else \
